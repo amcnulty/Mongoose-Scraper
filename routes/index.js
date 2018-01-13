@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const pageScraper = require('../logic/pageScraper');
+const articleHelper = require('../logic/articleHelper');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,10 +12,20 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/scrape', function(req, res, next) {
-  console.log("Scraping Data!");
-  pageScraper.scrapeData(function(data) {
-    console.log(data);
-    res.status(200).send(data).end();
+  pageScraper.scrapeData(function(err, data) {
+    if (err) {
+      throw err;
+      res.status(500).end();
+    }
+    else {
+      articleHelper.insertRecords(data, function(err) {
+        if (err) {
+          throw err;
+          res.status(500).end();
+        }
+        else res.status(200).send(data).end();
+      });
+    }
   });
 });
 
