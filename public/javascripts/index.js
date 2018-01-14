@@ -13,8 +13,24 @@ window.onload = function() {
     }
     xhr.send();
   }
+  const saveArticle = function(articleId) {
+    $.ajax({
+      url: './save-article',
+      method: 'PUT',
+      data: {
+        id: articleId
+      }
+    }).done(function(response) {
+      console.log(`Article Saved!!
+      
+      ${response}`);
+    });
+  }
   const scrapeButton = document.getElementById('scrapeButton');
   scrapeButton.addEventListener('click', function(e) {
     scrapeArticles();
   }, false);
+  $(document).on('click', '.save', function(e) {
+    saveArticle($(e.target).attr('data-id'));
+  });
 }

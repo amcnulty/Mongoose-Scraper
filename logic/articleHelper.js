@@ -11,6 +11,12 @@ const findAll = function(cb) {
     else cb(null, articles);
   });
 }
+const findSaved = function(cb) {
+  db.Article.find({ saved: true}, function(err, articles) {
+    if (err) cb(err);
+    else cb(null, articles);
+  });
+}
 /**
  * Inserts records into database from a set of records. Returns
  * the number of unique entries that are added.
@@ -85,6 +91,7 @@ const removeFromSaves = function(id, cb) {
 module.exports = {
   insertRecords: insertRecords,
   findAll: findAll,
-  saveArticle: save,
-  removeFromSaves: removeFromSaves
+  save: save,
+  removeFromSaves: removeFromSaves,
+  findSaved: findSaved
 }

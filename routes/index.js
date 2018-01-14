@@ -15,6 +15,17 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/saved', function(req, res, next) {
+  // Get all saved articles and return to the view
+  articleHelper.findSaved(function(err, articles) {
+    if (err) throw err;
+    res.render('saved', {
+      title: 'Mongoose Scraper | Saved Articles',
+      articles: articles
+    });
+  });
+});
+
 router.put('/save-article', function(req, res, next) {
   // Save article by its id
   articleHelper.save(req.body.id, function(err, numAffected) {
