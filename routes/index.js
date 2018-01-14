@@ -6,13 +6,35 @@ const articleHelper = require('../logic/articleHelper');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // Grab all articles and send to hbs
   articleHelper.findAll(function(err, articles) {
     if (err) throw err;
     res.render('index', {
       title: 'Mongoose Scraper',
       articles: articles
     });
+  });
+});
+
+router.put('/save-article', function(req, res, next) {
+  // Save article by its id
+  articleHelper.save(req.body.id, function(err, numAffected) {
+    if (err) {
+      throw err;
+      req.status(500).end();
+    }
+    else if (numAffected === 0) res.status(404).end();
+    else res.status(200).end();
+  });
+});
+
+router.put('/remove-from-saves', function(req, res, next) {
+  articleHelper.removeFromSaves(req.body.id, function(err, numAffected) {
+    if (err) {
+      throw err;
+      req.status(500).end();
+    }
+    else if (numAffected === 0) res.status(404).end();
+    else res.status(200).end();
   });
 });
 

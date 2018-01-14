@@ -68,7 +68,23 @@ const addToDB = function(articleData, cb) {
   });
 }
 
+const save = function(id, cb) {
+  db.Article.update({_id: id}, { $set: { saved: true }}, function(err, numAffected) {
+    if (err) cb(err, numAffected.n);
+    else cb(null, numAffected.n);
+  });
+}
+
+const removeFromSaves = function(id, cb) {
+  db.Article.update({_id: id}, { $set: { saved: false}}, function(err, numAffected) {
+    if (err) cb(err, numAffected.n);
+    else cb(null, numAffected.n);
+  });
+}
+
 module.exports = {
   insertRecords: insertRecords,
-  findAll: findAll
+  findAll: findAll,
+  saveArticle: save,
+  removeFromSaves: removeFromSaves
 }
