@@ -7,8 +7,12 @@ const articleHelper = require('../logic/articleHelper');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // Grab all articles and send to hbs
-  res.render('index', {
-    title: 'Mongoose Scraper'
+  articleHelper.findAll(function(err, articles) {
+    if (err) throw err;
+    res.render('index', {
+      title: 'Mongoose Scraper',
+      articles: articles
+    });
   });
 });
 
