@@ -6,24 +6,25 @@ const articleHelper = require('../logic/articleHelper');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  // Grab all articles and send to hbs
   res.render('index', {
     title: 'Mongoose Scraper'
   });
 });
 
-router.get('/scrape', function(req, res, next) {
+router.put('/scrape', function(req, res, next) {
   pageScraper.scrapeData(function(err, data) {
     if (err) {
       throw err;
       res.status(500).end();
     }
     else {
-      articleHelper.insertRecords(data, function(err) {
+      articleHelper.insertRecords(data, function(err, numOfRecords) {
         if (err) {
           throw err;
           res.status(500).end();
         }
-        else res.status(200).send(data).end();
+        else res.status(200).send({numOfRecords: numOfRecords}).end();
       });
     }
   });
