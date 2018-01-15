@@ -1,6 +1,8 @@
 'use strict'
 
 const Article = require('./Article');
+const Comment = require('./Comment');
 module.exports = {
-  Article: Article
+  Article: Article,
+  Comment: Comment.Comment,
 }
