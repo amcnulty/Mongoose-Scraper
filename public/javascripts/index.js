@@ -12,7 +12,7 @@ window.onload = function() {
         console.log(JSON.parse(xhr.responseText).numOfRecords);
         let message;
         if (JSON.parse(xhr.responseText).numOfRecords > 0) {
-          message = (xhr.responseText).numOfRecords + ' new articles scraped!';
+          message = JSON.parse(xhr.responseText).numOfRecords + ' new articles scraped!';
         }
         else message = 'No new articles to scrape. Check back later.'
         bootbox.alert("<h3 class='text-center m-top-80'>" + message + "<h3>");
