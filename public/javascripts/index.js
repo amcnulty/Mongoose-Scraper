@@ -11,7 +11,7 @@ window.onload = function() {
       else if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
         console.log(JSON.parse(xhr.responseText).numOfRecords);
         let message;
-        if ((xhr.responseText).numOfRecords > 0) {
+        if (JSON.parse(xhr.responseText).numOfRecords > 0) {
           message = (xhr.responseText).numOfRecords + ' new articles scraped!';
         }
         else message = 'No new articles to scrape. Check back later.'
