@@ -5,10 +5,7 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
     name: String,
-    email: {
-        type: String,
-        match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
-    },
+    email: String,
     comment: String
 });
 

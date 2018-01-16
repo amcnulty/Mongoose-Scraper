@@ -1,25 +1,36 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-{{#each articles}}
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3>
-        <a class="article-link" target="_blank" href={{link}}>
-          {{heading}}
-        </a>
-        <a class="btn btn-danger delete" data-id={{_id}}>
-          Delete From Saved
-        </a>
-        <a class="btn btn-info notes">
-          Article Notes
-        </a>
-      </h3>
-    </div>
-    <div class="panel-body">
-      {{summary}}
-    </div>
+{{> header}}
+<div class="jumbotron text-center">
+  <div class="overlay">
   </div>
-{{/each}}
+  <div class="background-image">
+  </div>
+  <div class="caption">
+    <h1>Saved Articles</h1>
+    <p>Your Saved Articles</p>
+  </div>
+</div>
+<div class="container-fluid article-container">
+  {{#each articles}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          <a class="article-link" target="_blank" href={{link}}>
+            {{heading}}
+          </a>
+          <a class="btn btn-danger delete" data-id={{_id}}>
+            Delete From Saved
+          </a>
+          <a class="btn btn-info notes" data-id={{_id}}>
+            Article Notes
+          </a>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{summary}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+{{> footer}}
 
 <script src="/javascripts/saved.js" type="text/javascript"></script>

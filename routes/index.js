@@ -11,6 +11,9 @@ router.get('/', function (req, res, next) {
     if (err) throw err;
     res.render('index', {
       title: 'Mongoose Scraper',
+      homeActive: 'active',
+      savedActive: '',
+      renderScrapeButton: true,
       articles: articles.reverse()
     });
   });
@@ -22,6 +25,8 @@ router.get('/saved', function (req, res, next) {
     if (err) throw err;
     res.render('saved', {
       title: 'Mongoose Scraper | Saved Articles',
+      homeActive: '',
+      savedActive: 'active',
       articles: articles.reverse()
     });
   });
